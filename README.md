@@ -4,6 +4,8 @@ All the dataset, config and libraries needed to clone yourself.
 https://medium.com/@rioharper/cloneyourself-c4a0b1793997
 
 ## Installation
+``` python pip install -r requirements.txt```
+
 ``` python pip install --upgrade openai wandb```
 
 ## Setup

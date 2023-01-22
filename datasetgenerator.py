@@ -6,13 +6,13 @@ import jsonlines
 from openai.wandb_logger import WandbLogger
 
 with open("questions.csv", encoding="utf8") as questions_file:
-    questions = np.loadtxt(questions_file, dtype=str, delimiter=">")
+    questions = np.loadtxt(str(questions_file), dtype=str, delimiter=">")
 
 with open("prompts.csv", encoding="utf8") as prompts_file:
-    prompts = np.loadtxt(prompts_file, dtype=str, delimiter="|")
+    prompts = np.loadtxt(str(prompts_file), dtype=str, delimiter="|")
 
 
-class dataset:
+class Dataset:
     def __init__(self, filename):
         self.filename = filename + ".json"
         self.counter = 0
@@ -52,7 +52,7 @@ class dataset:
             return False
 
 
-class question(dataset):
+class question(Dataset):
     def __init__(self, filename):
         super().__init__(filename)
         self.entry = None
@@ -80,7 +80,7 @@ class question(dataset):
         self.writeToFile()
 
 
-class prompt(dataset):
+class prompt(Dataset):
     def __init__(self, filename):
         super().__init__(filename)
         self.prompt = None
