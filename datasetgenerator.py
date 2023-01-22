@@ -4,12 +4,26 @@ import random
 import os
 import jsonlines
 from openai.wandb_logger import WandbLogger
+from dotenv import load_dotenv
 
-with open("questions.csv", encoding="utf8") as questions_file:
-    questions = np.loadtxt(str(questions_file), dtype=str, delimiter=">")
+# load environment variables from.env file
+load_dotenv()
 
-with open("prompts.csv", encoding="utf8") as prompts_file:
-    prompts = np.loadtxt(str(prompts_file), dtype=str, delimiter="|")
+# set environment variables
+# os.environ["WANDB_API_KEY"] =
+os.environ["WANDB_PROJECT"] = "openai-gpt-neo"
+os.environ["WANDB_ENTITY"] = "openai-gpt-neo"
+os.environ["WANDB_MODE"] = "dryrun"
+os.environ["WANDB_WATCH"] = "false"
+
+# questions_csv = 'questions.csv'
+# questions_csv = 'questions_cyborg.csv'
+
+# with open("questions.csv", encoding="utf8") as questions_file:
+with open("questions.csv") as questions_file:
+    questions = np.loadtxt(questions_file, dtype=str, delimiter=">")
+with open("prompts.csv") as prompts_file:
+    prompts = np.loadtxt(prompts_file, dtype=str, delimiter="|")
 
 
 class Dataset:

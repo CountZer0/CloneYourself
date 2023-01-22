@@ -8,9 +8,13 @@ https://medium.com/@rioharper/cloneyourself-c4a0b1793997
 
 ``` python pip install --upgrade openai wandb```
 
+```python pip install python-dotenv```
 ## Setup
-Environment variable:
-OPENAI_API_KEY = <secret>
+add these lines to your .env file in the project
+
+#Environment variable:
+WANDB_API_KEY=<YOUR_WANDB_API_KEY>
+OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
 
 ## Weights & Balances
 Setup account: https://wandb.ai/home
