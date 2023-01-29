@@ -3,11 +3,19 @@ import json
 import random
 import os
 import jsonlines
-from openai.wandb_logger import WandbLogger
-from dotenv import load_dotenv
+# from openai.wandb_logger import WandbLogger
+import wandb
+# from dotenv import load_dotenv
 
 # load environment variables from.env file
-load_dotenv()
+# load_dotenv()
+
+ENTITY = "count-zr0"
+PROJECT_NAME = "AvatarGenerator"
+QUESTIONS_CSV = 'questions_cyborg.csv'
+MODEL = "davinci"
+LEARNING_RATE = .001
+EPOCHS = 200
 
 # set environment variables
 # os.environ["WANDB_API_KEY"] =
@@ -16,13 +24,12 @@ os.environ["WANDB_ENTITY"] = "openai-gpt-neo"
 os.environ["WANDB_MODE"] = "dryrun"
 os.environ["WANDB_WATCH"] = "false"
 
-# questions_csv = 'questions.csv'
-# questions_csv = 'questions_cyborg.csv'
-
 # with open("questions.csv", encoding="utf8") as questions_file:
-with open("questions.csv") as questions_file:
+with open(QUESTIONS_CSV, encoding="utf8") as questions_file:
+    # with open("questions.csv") as questions_file:
     questions = np.loadtxt(questions_file, dtype=str, delimiter=">")
-with open("prompts.csv") as prompts_file:
+with open("prompts.csv", encoding="utf8") as prompts_file:
+    # with open("prompts.csv") as prompts_file:
     prompts = np.loadtxt(prompts_file, dtype=str, delimiter="|")
 
 
@@ -142,9 +149,12 @@ class FineTuneModel:
                 self.filename = filename + ".jsonl"
             else:
                 self.filename = filename + ".jsonl"
-        self.epoch = 2
-        self.model = "curie"
-        self.learning_rate = 0.02
+        # self.epoch = 2
+        self.epoch = EPOCHS
+        # self.model = "curie"
+        self.model = MODEL
+        # self.learning_rate = 0.02
+        self.learning_rate = LEARNING_RATE
 
     def format(self):
         with open(self.filename.replace(".jsonl", ".json"), "r") as old:
@@ -206,16 +216,24 @@ def datasetcreator():
 def finetune():
     newModel = FineTuneModel()
     newModel.finetune()
-    WandbLogger.sync(
-        id=None,
-        # id="ft-jdYNZPl1VWAaJ8RWvyJDEVhl",
-        n_fine_tunes=None,
-        # project="GPT-3",
-        project="chatTrainTest",
-        # entity=None,
-        entity="count-zr0",
-        force=False,
-    )
+    # WandbLogger.sync(
+    #     id=None,
+    #     # id="ft-jdYNZPl1VWAaJ8RWvyJDEVhl",
+    #     n_fine_tunes=None,
+    #     project="testing",
+    #     # project=PROJECT_NAME,
+    #     # entity=None,
+    #     entity="count-zr0",
+    #     force=False,
+    # )
+    wandb.init(project=PROJECT_NAME, entity=ENTITY)
+    wandb.config = {
+        "learning_rate": LEARNING_RATE,
+        "epochs": EPOCHS,
+        "batch_size": 128
+    }
+
+    # wandb.log({"loss": loss})
 
 
 print("Welcome to the AI dataset generator!")
