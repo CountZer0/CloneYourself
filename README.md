@@ -15,6 +15,7 @@ Set these in your System-User environment variables
 #Environment variable:
 WANDB_API_KEY=<YOUR_WANDB_API_KEY>
 OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
+WANDB_MODE=online
 
 ## Weights & Balances
 Setup account: https://wandb.ai/home

@@ -5,20 +5,20 @@ import os
 import jsonlines
 # from openai.wandb_logger import WandbLogger
 import wandb
-# from dotenv import load_dotenv
-
-# load environment variables from.env file
-# load_dotenv()
 
 ENTITY = "count-zr0"
 PROJECT_NAME = "AvatarGenerator"
 QUESTIONS_CSV = 'questions_cyborg.csv'
+# MODEL = "ada"
+# MODEL = "babbage"
+# MODEL = "curie"
 MODEL = "davinci"
-LEARNING_RATE = .001
-EPOCHS = 200
+LEARNING_RATE = .02
+# LEARNING_RATE = .2
+# EPOCHS = 200
+EPOCHS = 4
 
 # set environment variables
-# os.environ["WANDB_API_KEY"] =
 os.environ["WANDB_PROJECT"] = "openai-gpt-neo"
 os.environ["WANDB_ENTITY"] = "openai-gpt-neo"
 os.environ["WANDB_MODE"] = "dryrun"
