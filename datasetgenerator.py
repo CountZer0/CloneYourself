@@ -216,24 +216,12 @@ def datasetcreator():
 def finetune():
     newModel = FineTuneModel()
     newModel.finetune()
-    # WandbLogger.sync(
-    #     id=None,
-    #     # id="ft-jdYNZPl1VWAaJ8RWvyJDEVhl",
-    #     n_fine_tunes=None,
-    #     project="testing",
-    #     # project=PROJECT_NAME,
-    #     # entity=None,
-    #     entity="count-zr0",
-    #     force=False,
-    # )
     wandb.init(project=PROJECT_NAME, entity=ENTITY)
     wandb.config = {
         "learning_rate": LEARNING_RATE,
         "epochs": EPOCHS,
         "batch_size": 128
     }
-
-    # wandb.log({"loss": loss})
 
 
 print("Welcome to the AI dataset generator!")
