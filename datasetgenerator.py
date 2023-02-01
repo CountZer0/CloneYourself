@@ -9,6 +9,7 @@ import wandb
 ENTITY = "count-zr0"
 PROJECT_NAME = "AvatarGenerator"
 QUESTIONS_CSV = 'questions_cyborg.csv'
+# QUESTIONS_CSV = 'questions.csv'
 # MODEL = "ada"
 # MODEL = "babbage"
 # MODEL = "curie"
